@@ -1,7 +1,6 @@
 import asyncio
 from web3 import Web3
 from web3.middleware import geth_poa_middleware
-from time import sleep
 from utils.logger import logger
 from utils.config import load_config
 from utils.kelas import Loader
@@ -19,7 +18,6 @@ async def web3Taiko(count, address, private_key, gwei, mode):
     retries = 0
     maxretries = 5
     rpc = load_config('taiko_url')
-    notif = load_config('bot_notif')
     while True:
         try:
             w3 = Web3(Web3.HTTPProvider(rpc))
@@ -28,7 +26,7 @@ async def web3Taiko(count, address, private_key, gwei, mode):
                 retries += 1
                 logger.warning(f'Failed connect to RPC: {retries}/{maxretries}')
                 if retries >= maxretries:
-                    if notif: await send_message(f'Failed connect to RPC {retries}/{maxretries}')
+                    await send_message(f'Failed connect to RPC {retries}/{maxretries}')
                     exit()
                 await asyncio.sleep(5)
             else:
@@ -56,12 +54,12 @@ async def web3Taiko(count, address, private_key, gwei, mode):
             if "is not in the chain after 120 seconds" in str(e):
                 retries += 1
                 logger.warning(f'Info {retries}/{maxretries} | Message: {str(e)}')
-                if retries >= maxretries and notif: 
+                if retries >= maxretries: 
                     await send_message(f'Info: {retries}/{maxretries}\rError: {str(e)}')
                     logger.error(f'TX {count} | Error: {psnE(str(e))}')
                     exit()
                 await asyncio.sleep(5)
             logger.error(f'TX {count} | Error: {psnE(str(e))}')
-            if notif: await send_message(f'TX {count} | Error: {str(e)}')
+            await send_message(f'TX {count} | Error: {str(e)}')
             exit()
 
