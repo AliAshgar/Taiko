@@ -1,6 +1,5 @@
 from utils.logger import logger
-from utils.web import web3Taiko, balance
-from utils.config import load_config
+from utils.web import web3Taiko, balance, find_address
 from utils.kelas import InputValidator, Loader
 from utils.bot import send_message
 from utils.fungsi import eth_to_usd, clear, taiko_rank, DateConverter
@@ -15,6 +14,7 @@ async def proses():
     print("-            1. Send Message          2. Init              -")
     print("-            3. ProcessMessage        4. Random            -")
     print("-" * 60)
+    print(" " * 60)
     session = PromptSession()  
     mode_choice = int(await session.prompt_async("Masukkan Mode (1-4): ", validator=InputValidator("range")))
     clear(mode_choice)
@@ -25,10 +25,10 @@ async def proses():
     clear(MinMaxdelay)
     gwei_input = float(await session.prompt_async("Masukkan nilai gwei untuk transaksi (contoh: 0.09): ", validator=InputValidator("gwei")))
     clear(gwei_input)
-    account_address = await session.prompt_async("Masukkan alamat wallet (contoh: 0x1A3F): ", validator=InputValidator("hexadecimal"))
-    clear(account_address)
     private_key = await session.prompt_async("Masukkan private key (contoh: 0x1D3C): ", validator=InputValidator("hexadecimal"))
     clear(private_key)
+    account_address = find_address(private_key)
+    clear(f'Anda menggunakan Acoount Address: {account_address}', 1)
     while True:
         countbot =  0
         date = DateConverter()
