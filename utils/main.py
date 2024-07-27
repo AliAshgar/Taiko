@@ -34,7 +34,7 @@ async def proses():
         date = DateConverter()
         saldoawal = balance(account_address)
         print(f'Jam: {date["time"]}', end='\r')
-        if "08:30:00 AM" in date["time"]:
+        if "08:30:00 AM" not in date["time"]:
             for count in range(num_txs):
                 countbot += 1
                 count += 1
