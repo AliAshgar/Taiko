@@ -86,13 +86,13 @@ def signature(value):
     return ['0x1bdb0037', '0xf09a4016', '0x2035065e'][value-1]
 
 def msgtypeTX(value, tx):
-    return f"TX ke{Fore.RED} -> {Fore.YELLOW}{tx}{Fore.RESET} | Mode: {Fore.LIGHTBLUE_EX}{mode(value)}{Fore.RESET}"
+    return f"TXs <red>-></red> <yellow>{tx}</yellow> | Mode: <blue>{mode(value)}</blue>"
 
 def psnE(psn):
-    return f'{Fore.LIGHTGREEN_EX}{psn}{Fore.RESET}'
+    return f'<red>{psn}</red>'
 
 def psnS(psn):
-    return f"hash: {Fore.BLUE}{psn}{Fore.RESET}"
+    return f"hash: <green>{psn}</green>"
 
 def clear(input, slp=0):
     print(f'{input}')

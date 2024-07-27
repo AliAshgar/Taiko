@@ -56,10 +56,10 @@ async def web3Taiko(count, address, private_key, gwei, mode):
         except Exception as e:  # Log exception
             if "is not in the chain after 120 seconds" in str(e):
                 retries += 1
-                logger.warning(f'Info {retries}/{maxretries} | Message: {str(e)}')
+                logger.warning(f'Info {retries}/{maxretries} | Message: <yellow>{str(e)}</yellow>')
                 if retries >= maxretries: 
                     await send_message(f'Info: {retries}/{maxretries}\rError: {str(e)}')
-                    logger.error(f'TX {count} | Error: {psnE(str(e))}')
+                    logger.error(f'TX {count} | Error: <red>str(e))</red>')
                     exit()
                 await asyncio.sleep(5)
             logger.error(f'TX {count} | Error: {psnE(str(e))}')
