@@ -1,6 +1,6 @@
 {
     "taiko_url": "https://rpc.taiko.xyz",
-    "chat_id": "483336265",
-    "auth_token": "7198382462:AAHjs6AN04Ju6VtNdjXv9EDq_CE3Rs21eo4",
-    "bot_notif": true
+    "chat_id": "CHAT ID",
+    "auth_token": "BOT AUTH",
+    "bot_notif": false
 }
