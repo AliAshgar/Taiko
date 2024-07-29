@@ -30,6 +30,10 @@ pip install python-telegram-bot
 pip install prompt_toolkit
 ```
 
+```
+pip install loguru
+```
+
 Edit config.json untuk penyesuaian bot telegram
 ```
 cd utils
