@@ -36,12 +36,16 @@ class InputValidator(Validator):
         if "delay" in self.validation_types:
             try:
                 min_delay, max_delay = map(int, text.split('-'))
+                # Menambahkan validasi untuk memastikan input adalah dua angka
+                if not all(x.isdigit() for x in text.split('-')):
+                    raise ValidationError(message='Input harus berupa dua angka yang dipisahkan oleh tanda "-"', cursor_position=len(text))
                 if min_delay < 0 or max_delay < 0:
                     raise ValidationError(message='Delay harus lebih besar atau sama dengan 0', cursor_position=len(text))
                 if min_delay >= max_delay:
                     raise ValidationError(message='max_delay harus lebih besar dari min_delay', cursor_position=len(text))
             except ValueError:
                 raise ValidationError(message='Input harus berupa dua angka yang dipisahkan oleh tanda "-"', cursor_position=len(text))
+            map(int, text.split('-'))
 
         if "gwei" in self.validation_types:
             try:
