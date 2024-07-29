@@ -3,10 +3,11 @@ import os
 
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'config.json')
 
-def load_config(key):
+def load_config(key=False):
     with open(CONFIG_PATH, 'r') as file:
         load = json.load(file)
-        return load[key]
+        if key and key in load: return load[key]
+        else: return load
 
 def write_config(data):
     try:

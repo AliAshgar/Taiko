@@ -1,6 +1,7 @@
 {
     "taiko_url": "https://rpc.taiko.xyz",
     "chat_id": "CHAT ID",
-    "auth_token": "TOKEN BOT", 
-    "bot_notif": true
+    "auth_token": "TOKEN BOT",
+    "bot_notif": false,
+    "run_time": "18:46"
 }

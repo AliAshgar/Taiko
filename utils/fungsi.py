@@ -1,7 +1,6 @@
 import requests, sys, pytz
 from time import sleep
 from decimal import Decimal
-from colorama import Fore
 from datetime import datetime
 
 def taiko_rank(address):
@@ -25,7 +24,7 @@ def eth_to_usd(eth_amount):
     return f'{eth_amount:.6f} ETH - (${eth_to_usd_value:.2f})'
 
 
-def DateConverter(timezone_str='Asia/Makassar'):
+def DateConverter(timezone_str='Asia/Jakarta'):
     # Mapping hari dan bulan dari bahasa Inggris ke bahasa Indonesia
     days_map = {
         'Monday': 'Senin',
@@ -73,6 +72,7 @@ def DateConverter(timezone_str='Asia/Makassar'):
     formatted_date['date'] = f"{local_date.strftime('%d')} {month_name_id} {local_date.strftime('%Y')}"
     formatted_date['time'] = f"{local_date.strftime('%I:%M:%S %p')}"
     formatted_date['all'] = f"Hari: {day_name_id}, {local_date.strftime('%d')} {month_name_id} {local_date.strftime('%Y')}"
+    formatted_date['run_time'] = f"{local_date.strftime('%H:%M')}"
     
     return formatted_date
 

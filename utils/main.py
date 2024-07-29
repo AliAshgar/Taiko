@@ -4,6 +4,7 @@ from utils.kelas import InputValidator, Loader
 from utils.bot import send_message
 from utils.fungsi import eth_to_usd, clear, taiko_rank, DateConverter
 from prompt_toolkit.shortcuts import PromptSession
+from utils.config import load_config, write_config
 import asyncio, random
 
 async def proses():
@@ -29,12 +30,18 @@ async def proses():
     clear(private_key)
     account_address = find_address(private_key)
     clear(f'Anda menggunakan Acoount Address: {account_address}', 1)
+    run_time = DateConverter()
+    print(f'Running Time in next time: {run_time['run_time']}')
+    load = load_config()
+    load['run_time'] = run_time['run_time']
+    write_config(load)
     while True:
         countbot =  0
         date = DateConverter()
+        load_run = load_config("run_time")
         saldoawal = balance(account_address)
-        print(f'Jam: {date["time"]}', end='\r')
-        if "08:30:00 AM" in date["time"]:
+        print(f'Jam: {date["time"]} run: {load_run}', end='\r')
+        if load_run in date["run_time"]:
             for count in range(num_txs):
                 countbot += 1
                 count += 1
@@ -54,6 +61,6 @@ async def proses():
                     await send_message(f'TX: ({count}/{num_txs})\n{jam["all"]}\n{taiko_rank(account_address)}\nSaldo Awal: {eth_to_usd(saldoawal)}\nSaldo Akhir: {eth_to_usd(saldoakhir)}\nSaldo terpakai: {eth_to_usd(saldo)}','Markdown')
                     count = 0
                 else:
-                    with Loader(f"Mohon tunggu.", '', randomDelay):
+                    with Loader(f"Please Wait....", '', randomDelay):
                         await asyncio.sleep(randomDelay)
         await asyncio.sleep(1)

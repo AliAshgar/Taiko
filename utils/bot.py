@@ -12,4 +12,4 @@ async def send_message( message, parse_mode='HTML'):
             logger.error(f"Message Error: {str(e)}")
 
     else:
-        logger.warning(f"<yellow>Chat Bot False or Chat ID None. Please set the chat ID or Chat Bot in the config.json file.</red>")
+        logger.warning(f"<yellow>Chat Bot False or Chat ID None. Please set the chat ID or Chat Bot in the config.json file.</yellow>")
