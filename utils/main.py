@@ -19,14 +19,9 @@ async def proses():
 
     session = PromptSession()  
     mode_choice = int(await session.prompt_async("Masukkan Mode (1-4): ", validator=InputValidator("range")))
-    #clear(mode_choice)
     num_txs = int(await session.prompt_async("Masukkan jumlah transaksi:  ", validator=InputValidator("digit")))
-    #clear(num_txs)
     min_delay, max_delay = map(int, (await session.prompt_async("Masukkan rentang delay per transaksi (contoh: 20-60): ", validator=InputValidator("delay"))).split("-"))
-    #min_delay, max_delay = map(int, MinMaxdelay.split('-'))
-    #clear(MinMaxdelay)
     gwei_input = float(await session.prompt_async("Masukkan nilai gwei untuk transaksi (contoh: 0.09): ", validator=InputValidator("gwei")))
-    #clear(gwei_input)
     while True:
         private_key = await session.prompt_async("Masukkan private key (contoh: 0x1D3C): ", validator=InputValidator("hexadecimal"))
         clear(private_key)
@@ -37,7 +32,7 @@ async def proses():
         except:
             print(f"Tidak ditemukannya Address pada Private Key: {private_key[:6]}....{private_key[-6:]}")
     run_time = DateConverter()
-    print(f'Running Time in next time: {run_time['run_time']}')
+    print(f'Running Time in next time: {run_time["run_time"]}')
     load = load_config()
     load['run_time'] = run_time['run_time']
     write_config(load)
